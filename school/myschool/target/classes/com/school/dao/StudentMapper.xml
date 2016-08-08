@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.school.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.school.po.Student" >
+    <id column="stu_id" property="stuId" jdbcType="VARCHAR" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birth" property="birth" jdbcType="DATE" />
+    <result column="admission_date" property="admissionDate" jdbcType="DATE" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="father_name" property="fatherName" jdbcType="VARCHAR" />
+    <result column="mother_name" property="motherName" jdbcType="VARCHAR" />
+    <result column="parents_phone" property="parentsPhone" jdbcType="VARCHAR" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stu_id, stu_name, sex, birth, admission_date, class_id, father_name, mother_name, 
+    parents_phone, adress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.school.po.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from student
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.school.po.StudentExample" >
+    delete from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.school.po.Student" >
+    insert into student (stu_id, stu_name, sex, 
+      birth, admission_date, class_id, 
+      father_name, mother_name, parents_phone, 
+      adress)
+    values (#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=DATE}, #{admissionDate,jdbcType=DATE}, #{classId,jdbcType=INTEGER}, 
+      #{fatherName,jdbcType=VARCHAR}, #{motherName,jdbcType=VARCHAR}, #{parentsPhone,jdbcType=VARCHAR}, 
+      #{adress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.school.po.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birth != null" >
+        birth,
+      </if>
+      <if test="admissionDate != null" >
+        admission_date,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="fatherName != null" >
+        father_name,
+      </if>
+      <if test="motherName != null" >
+        mother_name,
+      </if>
+      <if test="parentsPhone != null" >
+        parents_phone,
+      </if>
+      <if test="adress != null" >
+        adress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=DATE},
+      </if>
+      <if test="admissionDate != null" >
+        #{admissionDate,jdbcType=DATE},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="fatherName != null" >
+        #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="motherName != null" >
+        #{motherName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsPhone != null" >
+        #{parentsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.school.po.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update student
+    <set >
+      <if test="record.stuId != null" >
+        stu_id = #{record.stuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuName != null" >
+        stu_name = #{record.stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null" >
+        birth = #{record.birth,jdbcType=DATE},
+      </if>
+      <if test="record.admissionDate != null" >
+        admission_date = #{record.admissionDate,jdbcType=DATE},
+      </if>
+      <if test="record.classId != null" >
+        class_id = #{record.classId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fatherName != null" >
+        father_name = #{record.fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.motherName != null" >
+        mother_name = #{record.motherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentsPhone != null" >
+        parents_phone = #{record.parentsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adress != null" >
+        adress = #{record.adress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update student
+    set stu_id = #{record.stuId,jdbcType=VARCHAR},
+      stu_name = #{record.stuName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birth = #{record.birth,jdbcType=DATE},
+      admission_date = #{record.admissionDate,jdbcType=DATE},
+      class_id = #{record.classId,jdbcType=INTEGER},
+      father_name = #{record.fatherName,jdbcType=VARCHAR},
+      mother_name = #{record.motherName,jdbcType=VARCHAR},
+      parents_phone = #{record.parentsPhone,jdbcType=VARCHAR},
+      adress = #{record.adress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.school.po.Student" >
+    update student
+    <set >
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null" >
+        birth = #{birth,jdbcType=DATE},
+      </if>
+      <if test="admissionDate != null" >
+        admission_date = #{admissionDate,jdbcType=DATE},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="fatherName != null" >
+        father_name = #{fatherName,jdbcType=VARCHAR},
+      </if>
+      <if test="motherName != null" >
+        mother_name = #{motherName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsPhone != null" >
+        parents_phone = #{parentsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.school.po.Student" >
+    update student
+    set stu_name = #{stuName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=DATE},
+      admission_date = #{admissionDate,jdbcType=DATE},
+      class_id = #{classId,jdbcType=INTEGER},
+      father_name = #{fatherName,jdbcType=VARCHAR},
+      mother_name = #{motherName,jdbcType=VARCHAR},
+      parents_phone = #{parentsPhone,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR}
+    where stu_id = #{stuId,jdbcType=VARCHAR}
+  </update>
+</mapper>
