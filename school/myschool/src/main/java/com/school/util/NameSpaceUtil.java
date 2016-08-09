@@ -15,7 +15,7 @@ package com.school.util;
  */
 public class NameSpaceUtil {
 
-	private static final String PRE_NS = "com.chen.buywater.dao";
+	private static final String PRE_NS = "com.school.mapper";
 	
 	public static String getNameSpace(String entityClassName){
 		return PRE_NS + entityClassName.substring(entityClassName.lastIndexOf(".")) + "Mapper";

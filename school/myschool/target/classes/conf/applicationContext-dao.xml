@@ -26,10 +26,21 @@
         <!-- 加载mybatis的全局配置文件 -->
         <property name="typeAliasesPackage" value="com.school.po"/>
         <property name="mapperLocations" value="classpath*:com/school/dao/*.xml" />
+    	<property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageHelper">
+		        <property name="properties">
+		          <value>
+		            dialect=mysql
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+  		</property>
     </bean>
  <!--    mapper扫描器    扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.school.mapper, com.school.dao.base.impl"/>
+        <property name="basePackage" value="com.school.mapper,com.school.dao.*"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   <!--      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
        会导致数据源配置不管用，数据库连接不上。

@@ -13,6 +13,30 @@
   				classpath:conf/applicationContext-service.xml,
   	</param-value>
   </context-param>
+  
+  <filter>    
+    <filter-name>Character Encoding</filter-name>    
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>    
+    <init-param>    
+        <param-name>encoding</param-name>    
+        <param-value>UTF-8</param-value>    
+    </init-param>    
+   </filter>   
+   <filter>
+          <filter-name>PageFilter</filter-name>
+          <filter-class>com.school.filter.PageFilter</filter-class>
+   </filter>
+   
+    
+	<filter-mapping>    
+    	<filter-name>Character Encoding</filter-name>    
+    	<url-pattern>/*</url-pattern>    
+	</filter-mapping>
+  	<filter-mapping>
+          <filter-name>PageFilter</filter-name>
+          <url-pattern>/*</url-pattern>
+    </filter-mapping>
+      
    <listener>
 	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener> 

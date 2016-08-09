@@ -25,6 +25,8 @@ public interface BaseService<T>{
 	int updateByPrimaryKey(T t);
 	
 	List<T> selectAll(int offset, int limit);
+	
+	int deleteByPrimaryKey(String id);
 }
 
 

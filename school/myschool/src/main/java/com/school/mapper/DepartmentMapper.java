@@ -1,11 +1,12 @@
 package com.school.mapper;
 
+import com.school.dao.base.BaseDao;
 import com.school.po.Department;
 import com.school.po.DepartmentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface DepartmentMapper {
+public interface DepartmentMapper extends BaseDao<Department>{
     int countByExample(DepartmentExample example);
 
     int deleteByExample(DepartmentExample example);
@@ -27,4 +28,7 @@ public interface DepartmentMapper {
     int updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
+    
+    //应用于分页查询所有
+    List<Department> findAll();
 }
