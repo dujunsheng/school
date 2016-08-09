@@ -25,7 +25,7 @@
         <property name="dataSource" ref="dataSource" />
         <!-- 加载mybatis的全局配置文件 -->
         <property name="typeAliasesPackage" value="com.school.po"/>
-        <property name="mapperLocations" value="classpath*:com/chen/*/dao/*.xml" />
+        <property name="mapperLocations" value="classpath*:com/school/dao/*.xml" />
     </bean>
  <!--    mapper扫描器    扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
