@@ -19,7 +19,7 @@ import com.school.service.base.BaseService;
  *
  */
 @Service("BaseService")
-public class BaseServiceImpl<T> extends BaseDaoImpl<T> implements BaseService<T> {
+public class BaseServiceImpl<T> implements BaseService<T> {
 	
 	@Resource
 	private BaseDaoImpl<T> baseDaoImpl;

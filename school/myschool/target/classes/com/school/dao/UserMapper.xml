@@ -75,7 +75,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,27 +86,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user
+    from users
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
+    delete from users
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.school.po.UserExample" >
-    delete from user
+    delete from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.school.po.User" >
-    insert into user (id, u_id, u_pw, 
+    insert into users (id, u_id, u_pw, 
       u_status)
     values (#{id,jdbcType=INTEGER}, #{uId,jdbcType=VARCHAR}, #{uPw,jdbcType=VARCHAR}, 
       #{uStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.school.po.User" >
-    insert into user
+    insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -137,13 +137,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.school.po.UserExample" resultType="java.lang.Integer" >
-    select count(*) from user
+    select count(*) from users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user
+    update users
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -163,7 +163,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user
+    update users
     set id = #{record.id,jdbcType=INTEGER},
       u_id = #{record.uId,jdbcType=VARCHAR},
       u_pw = #{record.uPw,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.school.po.User" >
-    update user
+    update users
     <set >
       <if test="uId != null" >
         u_id = #{uId,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.school.po.User" >
-    update user
+    update users
     set u_id = #{uId,jdbcType=VARCHAR},
       u_pw = #{uPw,jdbcType=VARCHAR},
       u_status = #{uStatus,jdbcType=INTEGER}
@@ -196,6 +196,6 @@
   </update>
   
   <select id="selectByUidAndUpw" parameterType="User" resultMap="BaseResultMap">
-  	select *from user where u_id = #{uId} and u_pw = #{uPw}
+  	select *from users where u_id = #{uId} and u_pw = #{uPw}
   </select>
 </mapper>
