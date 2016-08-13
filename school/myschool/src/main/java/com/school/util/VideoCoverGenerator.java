@@ -4,26 +4,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.school.vo.FileUploadVo;
+import com.school.vo.ResourceVo;
 
 
 /**
- * 
-* @ClassName: VideoCoverGenerator
-* @Description: 使用FFmpeg生成视频缩略图
-* @author Catalyst
-* @date 2016年4月22日
-*
+ * 利用ffmpeg生成视频缩略图
+* @author  作者  chenbowei E-mail:bowei_chan@163.com
+* @date 创建时间：Aug 10, 2016 2:40:12 PM 
+* @version 1.0
  */
 public class VideoCoverGenerator {
-
-	private static final String FFMPEG_EXE_PATH = "D:/ffmpeg/bin/ffmpeg.exe";
+    	//需要有ffmpeg.exe程序
+	private static final String FFMPEG_EXE_PATH = "D:/ffmpeg.exe";
 	
-	public static String generateVideoCover(FileUploadVo vo) {
+	public static String generateVideoCover(ResourceVo rv) {
 		
-		String videoRealPath = vo.getRealPath() + "/" + vo.getFileName();
-		String videoRelativePath = vo.getRelativePath();
-		String coverRealPath = videoRealPath.substring(0, videoRealPath.lastIndexOf(".")) + ".jpg";
+		String videoRealPath = rv.getAbsolutePath();
+		String videoRelativePath = rv.getRelative_path();
+		String coverRealPath = rv.getThumb_path().substring(0,rv.getThumb_path().lastIndexOf(".")) + ".jpg";/*videoRealPath.substring(0, videoRealPath.lastIndexOf(".")) + ".jpg";*/
 		String coverRelativePath = videoRelativePath.substring(0, videoRelativePath.lastIndexOf(".")) + ".jpg";
 		
 		List<String> command = new ArrayList<String>();
@@ -38,7 +36,7 @@ public class VideoCoverGenerator {
 		command.add("-t");
 		command.add("0.001");
 		command.add("-s");
-		command.add("480*272");
+		command.add("150*150");
 		command.add(coverRealPath);
 		ProcessBuilder builder = new ProcessBuilder();
 		builder.command(command);
